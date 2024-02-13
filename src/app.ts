@@ -1,5 +1,6 @@
+import express, { Express, Router } from 'express';
 import { env, expressServer } from '@adapters/index';
-import { Server } from '@presentation/index';
+import { AppRoutes, Server } from '@presentation/index';
 
 (() => main())();
 
