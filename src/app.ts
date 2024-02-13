@@ -1,4 +1,4 @@
-import { env } from '@adapters/env';
+import { env, expressServer } from '@adapters/index';
 import { Server } from '@presentation/index';
 
 (() => main())();
@@ -6,5 +6,6 @@ import { Server } from '@presentation/index';
 async function main() {
   new Server({
     port: env.port,
+    server: expressServer,
   }).start();
 }
