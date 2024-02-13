@@ -2,8 +2,11 @@ import express, { Express, Router } from 'express';
 import { ServerAdapter } from '@adapters/server/server.adapter';
 import morgan from 'morgan';
 
-interface ServerConfiguration {
+interface ServerConfigurationOptionalProps {
   port: number;
+}
+interface ServerConfiguration
+  extends Partial<ServerConfigurationOptionalProps> {
   server: ServerAdapter;
 }
 
@@ -12,13 +15,13 @@ export class Server {
   private readonly router: Router;
   private readonly port: number;
 
-  constructor({ port, server }: ServerConfiguration) {
+  constructor({ port = 3000, server }: ServerConfiguration) {
     this.port = port;
     this.server = server.app<Express>();
     this.router = server.router<Router>();
   }
 
-  private middleware() {
+  private middleware(): void {
     this.server.use(express.json());
     this.server.use(express.urlencoded({ extended: true }));
     this.server.use(morgan('dev'));
@@ -28,13 +31,13 @@ export class Server {
     this.server.use(this.router);
   }
 
-  private listen() {
+  private listen(): void {
     this.server.listen(this.port, () =>
       console.log(`Server is now running and listening on port ${this.port}.`)
     );
   }
 
-  async start() {
+  async start(): Promise<void> {
     this.middleware();
     this.routerApp();
     this.listen();
