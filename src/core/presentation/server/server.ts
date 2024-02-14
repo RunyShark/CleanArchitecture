@@ -1,8 +1,9 @@
 import { Express, Router } from 'express';
-import { ServerAdapter } from '@adapters/server/server.adapter';
+
 import { AppRoutes } from '..';
 import { AppMiddleware } from '@presentation/middleware';
 import { color } from '@adapters/color/color-adapter';
+import { ServerAdapterDomain } from '@adapters/server/server.adapter.domain';
 
 interface ServerConfigurationOptionalProps {
   port: number;
@@ -10,7 +11,7 @@ interface ServerConfigurationOptionalProps {
 
 interface ServerConfiguration
   extends Partial<ServerConfigurationOptionalProps> {
-  server: ServerAdapter;
+  server: ServerAdapterDomain;
 }
 
 export class Server {

@@ -1,3 +1,4 @@
+import { encrypt } from '@adapters/encrypt/encrypt.adapter';
 import { Validators } from '@helpers/validators';
 
 export class RegisterUserDto {
@@ -20,6 +21,6 @@ export class RegisterUserDto {
     if (password.length < 6) return ['password must be at least 6 characters'];
     if (!name) return ['name is required'];
 
-    return [, new RegisterUserDto(email, password, name)];
+    return [, new RegisterUserDto(email, encrypt.encrypt(password), name)];
   }
 }
