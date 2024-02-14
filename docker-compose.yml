@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  myDB:
+    image: postgres:15.3
+    container_name: CleanArchitecture
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: CleanArchitecture
+      POSTGRES_PASSWORD: bHJVJFDSEJFDJe^t587GTD&*f
+      POSTGRES_DB: CleanArchitecture
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+  mongo-db:
+    image: mongo:6.0.6
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongo-user
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+    volumes:
+      - ./mongo:/data/db
+    ports:
+      - 27017:27017

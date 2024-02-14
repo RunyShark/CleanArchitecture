@@ -4,3 +4,5 @@ env
 package-lock.json
 dist/
 build/
+mongo/
+postgres/
