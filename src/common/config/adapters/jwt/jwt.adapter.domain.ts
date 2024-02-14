@@ -4,7 +4,7 @@ interface Handlers {
     secretOrPrivateKey: string,
     options: any
   ): Promise<string | null>;
-  verify(token: string, secret: string): Promise<boolean>;
+  verify<T>(token: string, secret: string): Promise<T | null>;
 }
 
 export abstract class JwtAdapterDomain implements Handlers {
@@ -13,5 +13,5 @@ export abstract class JwtAdapterDomain implements Handlers {
     secretOrPrivateKey: string,
     options: any
   ): Promise<string | null>;
-  abstract verify(token: string, secret: string): Promise<boolean>;
+  abstract verify<T>(token: string, secret: string): Promise<T | null>;
 }

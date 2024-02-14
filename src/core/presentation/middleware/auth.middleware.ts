@@ -1,7 +1,7 @@
 import { env } from '@adapters/env';
 import { jwtAdapter } from '@adapters/jwt/jwt.adapter';
 import { NextFunction, Request, Response } from 'express';
-import { ApiResponse, CustomError } from 'src/core/domain';
+import { CustomError } from 'src/core/domain';
 
 export class AuthMiddleware {
   static validateJWT = async (
@@ -17,7 +17,10 @@ export class AuthMiddleware {
 
     const token = authorization.split(' ').at(1) || '';
 
-    const isValidToken = await jwtAdapter.verify(token, env.jwt_secret);
+    const isValidToken = await jwtAdapter.verify<{ id: string }>(
+      token,
+      env.jwt_secret
+    );
 
     if (!isValidToken) return res.status(401).json({ error: 'Invalid token' });
 

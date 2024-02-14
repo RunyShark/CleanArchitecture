@@ -18,11 +18,11 @@ export class jwtAdapterInfrastructure implements JwtAdapterDomain {
     });
   }
 
-  verify(token: string, secret: string): Promise<boolean> {
+  async verify<T>(token: string, secret: string): Promise<T | null> {
     return new Promise((resolve) => {
-      this.jwtFn.verify(token, secret, (err) => {
-        if (err) resolve(false);
-        resolve(true);
+      this.jwtFn.verify(token, secret, (err, decode) => {
+        if (err) resolve(null);
+        resolve(decode as T);
       });
     });
   }
