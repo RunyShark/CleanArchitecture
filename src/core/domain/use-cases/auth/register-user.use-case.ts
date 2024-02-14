@@ -4,18 +4,7 @@ import { UserEntity } from '../../entities';
 import { AuthRepository } from '../../repositories';
 import { CustomError } from '../../errors';
 import { env } from '@adapters/env';
-import { GenericUseCase } from '../interface';
-
-interface User {
-  id: string;
-  email: string;
-  name: string;
-}
-
-export interface UserResponse {
-  token: string;
-  user: User;
-}
+import { GenericUseCase, UserResponse } from '../interface';
 
 export class RegisterUser
   implements GenericUseCase<RegisterUserDto, UserResponse>
