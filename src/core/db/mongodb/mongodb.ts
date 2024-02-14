@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { CustomError } from '../domain';
+import { CustomError } from '../../domain';
 import { color } from '@adapters/color/color-adapter';
 
 interface Options {
