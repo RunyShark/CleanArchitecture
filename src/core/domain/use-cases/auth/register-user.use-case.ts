@@ -4,6 +4,7 @@ import { UserEntity } from '../../entities';
 import { AuthRepository } from '../../repositories';
 import { CustomError } from '../../errors';
 import { env } from '@adapters/env';
+import { GenericUseCase } from '../interface';
 
 interface User {
   id: string;

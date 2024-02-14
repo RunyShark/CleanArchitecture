@@ -1,3 +1,3 @@
-interface GenericUseCase<Args, Response> {
+export interface GenericUseCase<Args, Response> {
   execute(args: Args): Promise<Response>;
 }
