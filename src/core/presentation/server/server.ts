@@ -2,6 +2,7 @@ import { Express, Router } from 'express';
 import { ServerAdapter } from '@adapters/server/server.adapter';
 import { AppRoutes } from '..';
 import { AppMiddleware } from '@presentation/middleware';
+import { color } from '@adapters/color/color-adapter';
 
 interface ServerConfigurationOptionalProps {
   port: number;
@@ -33,7 +34,11 @@ export class Server {
 
   private listen(): void {
     this.server.listen(this.port, () =>
-      console.log(`Server is now running and listening on port ${this.port}.`)
+      console.log(
+        color.success(
+          `Server is now running and listening on port ${this.port}.`
+        )
+      )
     );
   }
 
