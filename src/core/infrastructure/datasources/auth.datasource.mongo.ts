@@ -2,6 +2,7 @@ import { EncryptAdapterDomain } from '@adapters/encrypt/encrypt.adapter.domain';
 import { UserModel } from 'src/core/db';
 import { CustomError, RegisterUserDto, UserEntity } from 'src/core/domain';
 import { AuthDataSource } from 'src/core/domain/datasources';
+import { UserMapper } from '../mappers';
 
 export class AuthDataSourceMongo implements AuthDataSource {
   constructor(
@@ -26,14 +27,7 @@ export class AuthDataSourceMongo implements AuthDataSource {
 
       await user.save();
 
-      return new UserEntity(
-        user.id,
-        email,
-        user.password,
-        name,
-        user.roles,
-        user.img || ''
-      );
+      return UserMapper.toEntity(user);
     } catch (error) {
       if (error instanceof CustomError) throw error;
       throw CustomError.internal();
