@@ -1,16 +1,16 @@
 import { Request, Response } from 'express';
 import { AuthService } from './auth.service';
-import { BindMethods } from 'src/common/decorators';
+import { BindMethods } from '@decorators/BindMethods.decorator';
 
 @BindMethods
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  login(req: Request, res: Response) {
-    res.json(this.authService.login());
+  async login(req: Request, res: Response) {
+    res.json(await this.authService.login());
   }
 
-  register(req: Request, res: Response) {
-    res.json({ message: 'register' });
+  async register(req: Request, res: Response) {
+    res.json(await this.authService.register());
   }
 }

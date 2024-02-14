@@ -10,4 +10,5 @@ export abstract class ColorAdapter implements handler {
   abstract warning(color: string): string;
   abstract error(color: string): string;
   abstract success(color: string): string;
+  abstract primary(color: string): string;
 }

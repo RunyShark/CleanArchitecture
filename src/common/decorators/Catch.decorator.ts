@@ -1,5 +1,6 @@
-import { ReposeService } from '../service';
+import { color } from '@adapters/color/color-adapter';
 import { ValidPrototype } from './interface';
+import { ApiResponse } from '@rules/ApiResponse';
 //decorator pattern
 /**
  * Decorator to wrap each method of a class in a try-catch block.
@@ -18,17 +19,16 @@ export function Catch(constructor: Function) {
     ) {
       const originalFunction = originalPrototype[name];
 
-      originalPrototype[name] = async function (
-        this: { reposeService: ReposeService },
-        ...args: any[]
-      ) {
+      originalPrototype[name] = async function (...args: any[]) {
         try {
           return await originalFunction.apply(this, args);
         } catch (error) {
           const errorMessage = (error as Error).message;
-          console.error(`Error in method ${name}:`, errorMessage);
+          console.error(
+            color.error(`Error in method ${name}: ${errorMessage}`)
+          );
 
-          return this.reposeService.errorHandle(errorMessage);
+          return ApiResponse.errorHandle(errorMessage);
         }
       };
     }

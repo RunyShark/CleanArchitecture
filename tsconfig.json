@@ -32,7 +32,9 @@
     "paths": {
       "@presentation/*": ["src/core/presentation/*"],
       "@adapters/*": ["src/common/config/adapters/*"],
-      "@helpers/*": ["src/common/config/helpers/*"]
+      "@helpers/*": ["src/common/config/helpers/*"],
+      "@decorators/*": ["src/common/decorators/*"],
+      "@rules/*": ["src/common/rules/*"]
     },
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     // "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */

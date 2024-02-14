@@ -36,7 +36,9 @@ export class Server {
     this.server.listen(this.port, () =>
       console.log(
         color.success(
-          `Server is now running and listening on port ${this.port}.`
+          `Server is now running and listening on port ${color.primary(
+            `${this.port}`
+          )}`
         )
       )
     );
