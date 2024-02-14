@@ -6,7 +6,7 @@ import { AuthDataSource } from 'src/core/domain/datasources';
 export class AuthDataSourceMongo implements AuthDataSource {
   constructor(
     private readonly userModel: typeof UserModel,
-    private readonly encrypt: EncryptAdapterDomain
+    private readonly hash: EncryptAdapterDomain
   ) {}
 
   async register(registerUser: RegisterUserDto): Promise<UserEntity> {
@@ -21,7 +21,7 @@ export class AuthDataSourceMongo implements AuthDataSource {
       const user = await this.userModel.create({
         name,
         email,
-        password: this.encrypt.encrypt(password),
+        password: this.hash.encrypt(password),
       });
 
       await user.save();
