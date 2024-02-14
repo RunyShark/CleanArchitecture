@@ -13,6 +13,6 @@ export class AuthController {
   }
 
   async register(req: Request, res: Response) {
-    res.json(await this.authService.register());
+    res.json(await this.authService.register(req.body));
   }
 }

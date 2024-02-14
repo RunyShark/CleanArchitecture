@@ -3,7 +3,7 @@ interface Handler {
   router<T>(): T;
 }
 
-export abstract class ServerAdapter implements Handler {
+export abstract class ServerAdapterDomain implements Handler {
   abstract app<T>(): T;
   abstract router<T>(): T;
 }

@@ -1,4 +1,7 @@
 import express, { Router } from 'express';
-import { ExpressAdapter } from './express.adapter';
+import { ExpressAdapterInfrastructure } from './express.adapter.infrastructure';
 
-export const expressServer = new ExpressAdapter(express(), Router());
+export const expressServer = new ExpressAdapterInfrastructure(
+  express(),
+  Router()
+);

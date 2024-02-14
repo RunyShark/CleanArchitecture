@@ -1,7 +1,7 @@
 import colors from 'ansi-colors';
-import { ColorAdapter } from './color.adapter';
+import { ColorAdapterDomain } from './color.adapter.domain';
 
-export class AnsiColorsAdapter implements ColorAdapter {
+export class AnsiColorsAdapterInfrastructure implements ColorAdapterDomain {
   constructor(private readonly colorsFn: typeof colors) {}
 
   info(color: string): string {

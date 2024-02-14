@@ -1,7 +1,7 @@
 import { Express, Router } from 'express';
-import { ServerAdapter } from './server.adapter';
+import { ServerAdapterDomain } from './server.adapter.domain';
 
-export class ExpressAdapter implements ServerAdapter {
+export class ExpressAdapterInfrastructure implements ServerAdapterDomain {
   constructor(
     private readonly server: Express,
     private readonly routerAdapter: Router

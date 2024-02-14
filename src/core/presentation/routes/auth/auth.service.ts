@@ -16,7 +16,13 @@ export class AuthService {
     return ApiResponse.successHandle<UserEntity>(result);
   }
 
-  register() {
-    return ApiResponse.successHandle<string>('register');
+  async register(dto: RegisterUserDto) {
+    const [error, registerUserDto] = RegisterUserDto.create(dto);
+
+    if (error) return ApiResponse.errorHandle<string>(error);
+
+    const result = await this.authRepository.register(registerUserDto!);
+
+    return ApiResponse.successHandle<UserEntity>(result);
   }
 }

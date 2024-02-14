@@ -5,7 +5,7 @@ interface handler {
   success(color: string): string;
 }
 
-export abstract class ColorAdapter implements handler {
+export abstract class ColorAdapterDomain implements handler {
   abstract info(color: string): string;
   abstract warning(color: string): string;
   abstract error(color: string): string;

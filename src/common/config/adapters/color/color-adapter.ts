@@ -1,4 +1,4 @@
 import colors from 'ansi-colors';
-import { AnsiColorsAdapter } from './ansi-colors.adapter';
+import { AnsiColorsAdapterInfrastructure } from './ansi-colors.adapter.infrastructure';
 
-export const color = new AnsiColorsAdapter(colors);
+export const color = new AnsiColorsAdapterInfrastructure(colors);

@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { UserModel } from 'src/core/db';
 import { Router } from 'express';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
@@ -11,7 +11,9 @@ export class AuthRouter {
   constructor(private readonly router: Router) {}
 
   get routes(): Router {
-    const authRepository = new AuthRepositoryImpl(new AuthDataSourceMongo());
+    const authRepository = new AuthRepositoryImpl(
+      new AuthDataSourceMongo(UserModel)
+    );
 
     const authController = new AuthController(new AuthService(authRepository));
 
