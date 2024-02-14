@@ -1,6 +1,7 @@
 import { color } from '@adapters/color/color-adapter';
 import { ValidPrototype } from './interface';
-import { ApiResponse } from '@rules/ApiResponse';
+import { ApiResponse } from 'src/core/domain';
+
 //decorator pattern
 /**
  * Decorator to wrap each method of a class in a try-catch block.

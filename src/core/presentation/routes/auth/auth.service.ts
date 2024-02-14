@@ -1,6 +1,5 @@
 import { Catch } from '@decorators/Catch.decorator';
-import { ApiResponse } from '@rules/ApiResponse';
-import { RegisterUserDto } from 'src/core/domain';
+import { ApiResponse, RegisterUserDto } from 'src/core/domain';
 
 @Catch
 export class AuthService {
