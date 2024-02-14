@@ -7,6 +7,7 @@ import {
   AuthRepositoryImpl,
 } from 'src/core/infrastructure';
 import { encrypt } from '@adapters/encrypt/encrypt.adapter';
+import { AuthMiddleware } from '@presentation/middleware';
 
 enum Method {
   GET = 'get',
@@ -31,11 +32,6 @@ const routes: Route[] = [
     method: Method.POST,
     action: 'register',
   },
-  {
-    path: '/',
-    method: Method.GET,
-    action: 'getUsers',
-  },
 ];
 
 export class AuthRouter {
@@ -51,6 +47,8 @@ export class AuthRouter {
     routes.forEach(({ action, method, path }) =>
       this.router[method](path, authController[action as keyof AuthController])
     );
+
+    this.router.get('/', [AuthMiddleware.validateJWT], authController.getUsers);
 
     return this.router;
   }
