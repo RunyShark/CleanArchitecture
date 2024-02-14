@@ -1,10 +1,9 @@
-# CleanArchitecture
 
 <p align="center">
   <img src="https://res.cloudinary.com/runyshark1/image/upload/v1707709939/33Ho_ucktq0.gif" width="200" alt="Aether API](https://res.cloudinary.com/runyshark1/image/upload/v1707709243/5FC2_ml9ubh.gif)" />
 </p>
 
-# Project Setup and Execution Guide
+# CleanArchitecture
 
 ## How to Run 🚀
 
