@@ -6,13 +6,14 @@ import {
   AuthDataSourceMongo,
   AuthRepositoryImpl,
 } from 'src/core/infrastructure';
+import { encrypt } from '@adapters/encrypt/encrypt.adapter';
 
 export class AuthRouter {
   constructor(private readonly router: Router) {}
 
   get routes(): Router {
     const authRepository = new AuthRepositoryImpl(
-      new AuthDataSourceMongo(UserModel)
+      new AuthDataSourceMongo(UserModel, encrypt)
     );
 
     const authController = new AuthController(new AuthService(authRepository));

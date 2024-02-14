@@ -1,9 +1,13 @@
+import { EncryptAdapterDomain } from '@adapters/encrypt/encrypt.adapter.domain';
 import { UserModel } from 'src/core/db';
 import { CustomError, RegisterUserDto, UserEntity } from 'src/core/domain';
 import { AuthDataSource } from 'src/core/domain/datasources';
 
 export class AuthDataSourceMongo implements AuthDataSource {
-  constructor(private readonly userModel: typeof UserModel) {}
+  constructor(
+    private readonly userModel: typeof UserModel,
+    private readonly encrypt: EncryptAdapterDomain
+  ) {}
 
   async register(registerUser: RegisterUserDto): Promise<UserEntity> {
     const { email, password, name } = registerUser;
@@ -17,7 +21,7 @@ export class AuthDataSourceMongo implements AuthDataSource {
       const user = await this.userModel.create({
         name,
         email,
-        password,
+        password: this.encrypt.encrypt(password),
       });
 
       await user.save();
@@ -25,7 +29,7 @@ export class AuthDataSourceMongo implements AuthDataSource {
       return new UserEntity(
         user.id,
         email,
-        password,
+        user.password,
         name,
         user.roles,
         user.img || ''
