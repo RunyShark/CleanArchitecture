@@ -3,6 +3,9 @@ import { AuthRepository } from '../../domain/repositories/auth.repository';
 
 export class AuthRepositoryImpl implements AuthRepository {
   constructor(private readonly authDataSource: AuthDataSource) {}
+  getUserById(id: string): Promise<UserEntity | null> {
+    return this.authDataSource.getUserById(id);
+  }
   getUsers(): Promise<UserEntity[]> {
     return this.authDataSource.getUsers();
   }

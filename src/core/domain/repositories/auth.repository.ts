@@ -5,4 +5,5 @@ export abstract class AuthRepository {
   // abstract login(email: string, password: string): Promise<UserEntity>;
   abstract register(registerUser: RegisterUserDto): Promise<UserEntity>;
   abstract getUsers(): Promise<UserEntity[]>;
+  abstract getUserById(id: string): Promise<UserEntity | null>;
 }

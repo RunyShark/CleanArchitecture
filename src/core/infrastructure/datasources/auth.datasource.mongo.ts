@@ -9,6 +9,13 @@ export class AuthDataSourceMongo implements AuthDataSource {
     private readonly userModel: typeof UserModel,
     private readonly hash: EncryptAdapterDomain
   ) {}
+  async getUserById(id: string): Promise<UserEntity | null> {
+    const user = await this.userModel.findById(id);
+
+    if (!user) return null;
+
+    return UserMapper.toEntity(user);
+  }
 
   async getUsers(): Promise<UserEntity[]> {
     const users = await this.userModel.find();
