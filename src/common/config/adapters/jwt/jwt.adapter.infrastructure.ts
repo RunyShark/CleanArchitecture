@@ -18,7 +18,12 @@ export class jwtAdapterInfrastructure implements JwtAdapterDomain {
     });
   }
 
-  verify(token: string, secret: string): boolean {
-    throw new Error('Method not implemented.');
+  verify(token: string, secret: string): Promise<boolean> {
+    return new Promise((resolve) => {
+      this.jwtFn.verify(token, secret, (err) => {
+        if (err) resolve(false);
+        resolve(true);
+      });
+    });
   }
 }
