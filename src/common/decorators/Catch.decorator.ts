@@ -24,6 +24,7 @@ export function Catch(constructor: Function) {
           return await originalFunction.apply(this, args);
         } catch (error) {
           const errorMessage = (error as Error).message;
+
           console.error(
             color.error(`Error in method ${name}: ${errorMessage}`)
           );

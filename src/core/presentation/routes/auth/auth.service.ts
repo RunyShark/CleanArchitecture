@@ -1,12 +1,17 @@
 import { Catch } from '@decorators/Catch.decorator';
 import { ApiResponse } from '@rules/ApiResponse';
+import { RegisterUserDto } from 'src/core/domain';
 
 @Catch
 export class AuthService {
   constructor() {}
 
-  login() {
-    return ApiResponse.successHandle<string>('login');
+  login(dto: RegisterUserDto) {
+    const [error, result] = RegisterUserDto.create(dto);
+
+    if (error) return ApiResponse.errorHandle<string>(error);
+
+    return ApiResponse.successHandle<RegisterUserDto>(result!);
   }
 
   register() {

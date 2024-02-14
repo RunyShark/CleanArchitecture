@@ -34,7 +34,8 @@
       "@adapters/*": ["src/common/config/adapters/*"],
       "@helpers/*": ["src/common/config/helpers/*"],
       "@decorators/*": ["src/common/decorators/*"],
-      "@rules/*": ["src/common/rules/*"]
+      "@rules/*": ["src/common/rules/*"],
+      "@domain/*": ["src/domain/*"]
     },
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     // "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */

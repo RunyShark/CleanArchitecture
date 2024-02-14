@@ -1,13 +1,17 @@
 import { Request, Response } from 'express';
 import { AuthService } from './auth.service';
 import { BindMethods } from '@decorators/BindMethods.decorator';
+import { Result } from '@rules/ApiResponse';
+import { RegisterUserDto } from 'src/core/domain';
 
 @BindMethods
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   async login(req: Request, res: Response) {
-    res.json(await this.authService.login());
+    const response = await this.authService.login(req.body);
+
+    return res.status(response.state).json(response);
   }
 
   async register(req: Request, res: Response) {

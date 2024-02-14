@@ -1,7 +1,6 @@
 export enum ValidState {
-  OK = 'OK',
-
-  Error = 'Error',
+  OK = 200,
+  Error = 400,
 }
 
 type Ok<T> = { state: ValidState.OK; data: T };
