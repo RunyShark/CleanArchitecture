@@ -1,6 +1,6 @@
 import { color } from '@adapters/color/color-adapter';
 import { ValidPrototype } from './interface';
-import { ApiResponse } from 'src/core/domain';
+import { ApiResponse, CustomError } from 'src/core/domain';
 
 //decorator pattern
 /**
@@ -25,12 +25,14 @@ export function Catch(constructor: Function) {
           return await originalFunction.apply(this, args);
         } catch (error) {
           const errorMessage = (error as Error).message;
+          if (error instanceof CustomError)
+            return ApiResponse.errorHandle(error.statusError, errorMessage);
 
           console.error(
             color.error(`Error in method ${name}: ${errorMessage}`)
           );
 
-          return ApiResponse.errorHandle(errorMessage);
+          return ApiResponse.errorHandle(500, errorMessage);
         }
       };
     }

@@ -5,7 +5,7 @@ export enum ValidState {
 
 type Ok<T> = { state: ValidState.OK; data: T };
 
-type Error<E> = { state: ValidState.Error; data: E };
+type Error<E> = { state: number; data: E };
 
 export type Result<T, E> = Ok<T> | Error<E>;
 
@@ -14,7 +14,7 @@ export class ApiResponse {
     return { state: ValidState.OK, data };
   }
 
-  static errorHandle<E>(data: E): Error<E> {
-    return { state: ValidState.Error, data };
+  static errorHandle<E>(state: number, data: E): Error<E> {
+    return { state, data };
   }
 }

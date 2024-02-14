@@ -9,7 +9,8 @@ export class AuthService {
   async login(dto: RegisterUserDto) {
     const [error, registerUserDto] = RegisterUserDto.create(dto);
 
-    if (error) return ApiResponse.errorHandle<string>(error);
+    if (error)
+      return ApiResponse.errorHandle<string>(error.statusError, error.message);
 
     const result = await this.authRepository.register(registerUserDto!);
 
@@ -19,7 +20,8 @@ export class AuthService {
   async register(dto: RegisterUserDto) {
     const [error, registerUserDto] = RegisterUserDto.create(dto);
 
-    if (error) return ApiResponse.errorHandle<string>(error);
+    if (error)
+      return ApiResponse.errorHandle<string>(error.statusError, error.message);
 
     const result = await this.authRepository.register(registerUserDto!);
 
