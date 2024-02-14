@@ -22,7 +22,14 @@ export class AuthDataSourceMongo implements AuthDataSource {
 
       await user.save();
 
-      return new UserEntity(user.id, name, email, password, user.roles);
+      return new UserEntity(
+        user.id,
+        email,
+        password,
+        name,
+        user.roles,
+        user.img || ''
+      );
     } catch (error) {
       if (error instanceof CustomError) throw error;
       throw CustomError.internal();
