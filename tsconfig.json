@@ -31,7 +31,8 @@
     "baseUrl": "./",
     "paths": {
       "@presentation/*": ["src/core/presentation/*"],
-      "@adapters/*": ["src/common/config/adapters/*"]
+      "@adapters/*": ["src/common/config/adapters/*"],
+      "@helpers/*": ["src/common/config/helpers/*"]
     },
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     // "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */
