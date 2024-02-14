@@ -15,4 +15,8 @@ export class AuthController {
   async register(req: Request, res: Response) {
     res.json(await this.authService.register(req.body));
   }
+
+  async getUsers(req: Request, res: Response) {
+    res.json(await this.authService.getUsers());
+  }
 }

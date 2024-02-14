@@ -10,6 +10,14 @@ export class AuthDataSourceMongo implements AuthDataSource {
     private readonly hash: EncryptAdapterDomain
   ) {}
 
+  async getUsers(): Promise<UserEntity[]> {
+    const users = await this.userModel.find();
+
+    if (!users) throw CustomError.notFound('Users not found');
+
+    return users.map(UserMapper.toEntity);
+  }
+
   async register(registerUser: RegisterUserDto): Promise<UserEntity> {
     const { email, password, name } = registerUser;
     try {

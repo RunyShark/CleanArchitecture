@@ -8,6 +8,36 @@ import {
 } from 'src/core/infrastructure';
 import { encrypt } from '@adapters/encrypt/encrypt.adapter';
 
+enum Method {
+  GET = 'get',
+  POST = 'post',
+  PUT = 'put',
+  DELETE = 'delete',
+}
+interface Route {
+  path: string;
+  method: Method;
+  action: string;
+}
+
+const routes: Route[] = [
+  {
+    path: '/login',
+    method: Method.POST,
+    action: 'login',
+  },
+  {
+    path: '/register',
+    method: Method.POST,
+    action: 'register',
+  },
+  {
+    path: '/',
+    method: Method.GET,
+    action: 'getUsers',
+  },
+];
+
 export class AuthRouter {
   constructor(private readonly router: Router) {}
 
@@ -18,9 +48,9 @@ export class AuthRouter {
 
     const authController = new AuthController(new AuthService(authRepository));
 
-    this.router.post('/login', authController.login);
-
-    this.router.post('/register', authController.register);
+    routes.forEach(({ action, method, path }) =>
+      this.router[method](path, authController[action as keyof AuthController])
+    );
 
     return this.router;
   }

@@ -51,4 +51,10 @@ export class AuthService {
       token,
     });
   }
+
+  async getUsers() {
+    const result = await this.authRepository.getUsers();
+
+    return ApiResponse.successHandle<UserEntity[]>(result);
+  }
 }
