@@ -1,6 +1,7 @@
 import { Express, Router } from 'express';
 import { ServerAdapter } from '@adapters/server/server.adapter';
 import { AppRoutes } from '..';
+import { AppMiddleware } from '@presentation/middleware';
 
 interface ServerConfigurationOptionalProps {
   port: number;
@@ -22,6 +23,10 @@ export class Server {
     this.port = port;
   }
 
+  private middleware() {
+    new AppMiddleware(this.server).init();
+  }
+
   private routerApp() {
     this.server.use(new AppRoutes(this.router).routes);
   }
@@ -33,6 +38,7 @@ export class Server {
   }
 
   async start(): Promise<void> {
+    this.middleware();
     this.routerApp();
     this.listen();
   }
