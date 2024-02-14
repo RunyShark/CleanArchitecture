@@ -2,8 +2,10 @@ import { Catch } from '@decorators/Catch.decorator';
 import {
   ApiResponse,
   CustomError,
+  RegisterUser,
   RegisterUserDto,
   UserEntity,
+  UserResponse,
 } from 'src/core/domain';
 import { AuthRepository } from '../../../domain/repositories/auth.repository';
 import { jwtAdapter } from '@adapters/jwt/jwt.adapter';
@@ -40,16 +42,11 @@ export class AuthService {
     if (error)
       return ApiResponse.errorHandle<string>(error.statusError, error.message);
 
-    const result = await this.authRepository.register(registerUserDto!);
+    const newUser = await new RegisterUser(this.authRepository).execute(
+      registerUserDto!
+    );
 
-    const token = await this.generateToken(result);
-
-    if (!token) throw CustomError.badRequest('Error to generate token');
-
-    return ApiResponse.successHandle<UserEntity & { token: string }>({
-      ...result,
-      token,
-    });
+    return ApiResponse.successHandle<UserResponse>(newUser);
   }
 
   async getUsers() {
